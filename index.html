@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joan's Portfolio</title>
+    <style>
+        /* 隱藏額外介紹的樣式 */
+        #more-intro {
+            display: none;
+            line-height: 1.8;
+            color: #cccccc;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+        /* 頭貼滑動效果 */
+        .avatar-slide-right {
+            transform: translateX(100px);
+        }
+
+        /* 滑鼠跟隨星星的樣式 */
+        .star-particle {
+            position: absolute;
+            color: #00ffa3; /* 配合你的主題色 */
+            pointer-events: none; /* 確保星星不會擋到點擊 */
+            font-size: 14px;
+            z-index: 9999;
+            animation: fallAndFade 1s forwards;
+        }
+
+        @keyframes fallAndFade {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(0, 20px) scale(0.5); /* 向下飄落並縮小 */
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; background-color: #121212; overflow-x: hidden;">
+
+<div id="joan-portfolio-container" style="background-color: #121212; color: #ffffff; padding: 40px 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; min-height: 100vh;">
+    
+    <div id="intro-section" style="display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 600px; margin: 0 auto 40px auto;">
+        
+        <div id="avatar-container" style="position: relative; width: 150px; height: 150px; margin-bottom: 20px; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);">
+            <img src="image_7861fd.png" alt="Joan" style="width: 100%; height: 100%; border-radius: 50%; border: 3px solid #00ffa3; object-fit: cover; box-shadow: 0 0 20px rgba(0, 255, 163, 0.3);">
+        </div>
+
+        <h2 style="font-size: 28px; margin-bottom: 15px; color: #00ffa3;">Hi, I'm Joan!</h2>
+        
+        <p style="line-height: 1.8; color: #cccccc; font-size: 16px; margin-bottom: 10px;">
+            我是楊喬安，目前就讀<b>台中高工化工科二年級</b>。
+        </p>
+
+        <p id="more-intro">
+            在學習過程中，我逐步培養實驗操作能力、數據觀察與紀錄的習慣，也希望未來能持續往化工或實驗導向的方向發展。
+        </p>
+
+        <div style="display: flex; gap: 15px; justify-content: center;">
+            <button id="learn-more-btn" style="background: transparent; border: 1px solid #00ffa3; color: #00ffa3; padding: 8px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s;">了解更多 →</button>
+            <button id="game-btn" style="background: #00ffa3; color: #1a1a1a; border: none; padding: 8px 20px; border-radius: 25px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 255, 163, 0.2);">小遊戲 🎮</button>
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px solid #333; max-width: 800px; margin: 40px auto;">
+
+    <div style="max-width: 600px; margin: 0 auto; background: #1e1e1e; border-radius: 15px; padding: 20px; border: 1px solid #333;">
+        <h3 style="margin-top: 0; font-size: 20px; color: #00ffa3;">Chat with Joan AI</h3>
+        <div id="chat-window" style="height: 250px; overflow-y: auto; background: #121212; padding: 15px; border-radius: 10px; margin-bottom: 15px; display: flex; flex-direction: column; gap: 10px; border: 1px solid #2d2d2d;">
+            <div style="background: #2d2d2d; padding: 10px 15px; border-radius: 15px 15px 15px 5px; align-self: flex-start; max-width: 80%;">
+                嗨！我是 Joan 的 AI 助手。有什麼我可以幫妳的嗎？
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <input type="text" id="chat-input" placeholder="輸入訊息..." style="flex: 1; background: #2d2d2d; border: 1px solid #444; color: white; padding: 10px 15px; border-radius: 25px; outline: none;">
+            <button id="send-btn" style="background: #00ffa3; border: none; color: #1a1a1a; padding: 10px 20px; border-radius: 25px; font-weight: bold; cursor: pointer;">發送</button>
+        </div>
+    </div>
+</div>
+
+<div id="game-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center;">
+    <div style="background: #252525; color: white; padding: 30px; border-radius: 20px; width: 90%; max-width: 380px; text-align: center; border: 2px solid #00ffa3;">
+        <h3 style="margin-top: 0; color: #00ffa3;">🧪 化工小學霸挑戰賽</h3>
+        <div id="score-display" style="margin-bottom: 15px; font-weight: bold;">得分：0 / 100</div>
+        <div id="game-content">
+            <p id="q-text" style="font-size: 18px; min-height: 60px; display: flex; align-items: center; justify-content: center;"></p>
+            <div id="opt-container"></div>
+        </div>
+        <button id="close-btn" style="margin-top: 20px; background: #444; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; display: none;">關閉遊戲</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
